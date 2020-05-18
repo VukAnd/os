@@ -123,7 +123,7 @@ def main_menu():
         elif choice == '3':
             print(f'System Info:\nVersion: {version}')
             latest_version = requests.get('https://raw.githubusercontent.com/hellogoose/os/master/version.txt')
-            if float(latest_version) > version:
+            if float(latest_version.content) > version:
                 print('A new update is available!')
         elif choice == '4':
             print('Thank you. Have a nice day!')
