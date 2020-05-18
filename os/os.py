@@ -31,7 +31,7 @@ else:
 def main_menu():
     command = input('>')
     if command == 'help':
-        print('Very Good OS Help:\echo, showdir, duckduckgo')
+        print('Very Good OS Help:\echo, showdir, duckduckgo, cat')
     elif command == 'showdir':
         for i in range(len(os.listdir(os.path.dirname(os.path.realpath(__file__))))):
             print(os.listdir(os.path.dirname(os.path.realpath(__file__)))[i])
@@ -48,6 +48,23 @@ def main_menu():
             history.write(f'{query}\n')
         results = requests.get(f'https://api.duckduckgo.com/?q={query}&format=json&pretty=1&t=verygoodos').json()
         print(results['AbstractText'])
+    elif re.compile('cat (.*)').match(command):
+        data = re.findall('cat (.*)', command)[0]
+        if data[0] == '>':
+            data2 = []
+            for i in range(len(data)):
+                data2.append(data[i])
+            del data2[0]
+            data = ''
+            for i in range(len(data2)):
+                data += data2[i]
+            contents = input('Enter content of file.\n')
+            open(data, 'w').close()
+            with open(data, 'w') as file:
+                file.write(contents)
+        else:
+            with open(data, 'r') as file:
+                print(file.read())
     else:
         print('Invalid command.')
     main_menu()
