@@ -25,13 +25,13 @@ version = 1.0
 if sys.platform.startswith('linux'):
     real_os = 'linux'
 else:
-    real_os = 'window'
+    real_os = 'windows'
 
 
 def main_menu():
     command = input('>')
     if command == 'help':
-        print('Very Good OS Help:\echo, showdir, duckduckgo, cat')
+        print('Very Good OS Help:\echo, showdir, duckduckgo, cat, delete [file], run [file]')
     elif command == 'showdir':
         for i in range(len(os.listdir(os.path.dirname(os.path.realpath(__file__))))):
             print(os.listdir(os.path.dirname(os.path.realpath(__file__)))[i])
@@ -65,6 +65,10 @@ def main_menu():
         else:
             with open(data, 'r') as file:
                 print(file.read())
+    elif re.compile('delete (.*)').match(command):
+        os.remove(re.findall('delete (.*)', command)[0])
+    elif re.compile('run (.*)').match(command):
+        os.system(f'py {re.findall("run (.*)", command)[0]}')
     else:
         print('Invalid command.')
     main_menu()
