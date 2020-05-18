@@ -40,7 +40,7 @@ with open('logs.txt', 'w'):
 bext.bg('blue')
 bext.fg('white')
 bext.clear()
-print(f'Welcome to\n{pyfiglet.figlet_format("Very Good OS")}\nPress CTRL to continue')
+print(f'Welcome to\n{pyfiglet.figlet_format("Very Good OS")}\nby hellogoose\n\nPress CTRL to continue')
 while not keyboard.is_pressed('ctrl'):
     pass
 
