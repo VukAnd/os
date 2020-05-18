@@ -1,5 +1,6 @@
 import os
 import urllib.request
+import time
 print('Welcome to the setup wizard. This will install the required packages and the OS on your computer. The OS will be installed in the folder of this wizard.')
 proceed = input('Proceed? (Y/N)\n')
 if proceed == 'Y' or proceed == 'y':
@@ -13,6 +14,7 @@ if proceed == 'Y' or proceed == 'y':
         print('Required modules installed. Installing OS...')
         urllib.request.urlopen('https://github.com/hellogoose/os/releases/download/v1.1/os.zip')
         print('Finished. Please unzip the file. Welcome to the new age of operating systems!')
+        time.sleep(1)
     else:
         print('Cancelled. Have a nice day!')
 else:
