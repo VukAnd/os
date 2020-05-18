@@ -49,11 +49,7 @@ if sys.platform.startswith('linux'):
 else:
     os.system('cls')
 # declare some variables here
-<<<<<<< HEAD
 version = 1.2
-=======
-version = 1.1
->>>>>>> 84585834a9697a39d2e0f8e0b7e04551888d2406
 if sys.platform.startswith('linux'):
     real_os = 'linux'
 else:
