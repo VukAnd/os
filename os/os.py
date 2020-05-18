@@ -30,9 +30,13 @@ import keyboard
 import requests
 import re
 import time
-
+import sys
+import random
+import datetime
 print('Booting up...')
 time.sleep(1)
+with open('logs.txt', 'r'):
+    pass
 bext.bg('blue')
 bext.fg('white')
 bext.clear()
@@ -45,17 +49,25 @@ if sys.platform.startswith('linux'):
 else:
     os.system('cls')
 # declare some variables here
+<<<<<<< HEAD
 version = 1.2
+=======
+version = 1.1
+>>>>>>> 84585834a9697a39d2e0f8e0b7e04551888d2406
 if sys.platform.startswith('linux'):
     real_os = 'linux'
 else:
     real_os = 'windows'
+_fg = 'white'
+_bg = 'blue'
+invader_count = 15
 
 
 def main_menu():
+    global _fg, _bg, invader_count
     command = input('>')
     if command == 'help':
-        print('Very Good OS Help:\necho, showdir, duckduckgo, cat, delete [file], run [file]')
+        print('Very Good OS Help:\necho, showdir, duckduckgo, cat, delete [file], run [file], settings, rockpaperscissors, shutdown')
     elif command == 'showdir':
         for i in range(len(os.listdir(os.path.dirname(os.path.realpath(__file__))))):
             print(os.listdir(os.path.dirname(os.path.realpath(__file__)))[i])
@@ -65,7 +77,7 @@ def main_menu():
         print(f'Welcome to', end='')
         bext.fg('green')
         print(f'\n{pyfiglet.figlet_format("DuckDuckGo")}')
-        bext.fg('white')
+        bext.fg(_fg)
         print('Powered by the DuckDuckGo API. (https://api.duckduckgo.com/api)\n')
         query = input('Please enter your search query.\n')
         with open('logs.txt', 'a') as history:
@@ -93,6 +105,123 @@ def main_menu():
         os.remove(re.findall('delete (.*)', command)[0])
     elif re.compile('run (.*)').match(command):
         os.system(f'py {re.findall("run (.*)", command)[0]}')
+    elif command == 'settings':
+        print('Welcome to the Settings. Input the corresponding number for what you want.\n1 - Text Color/Colour\n2 - Background Color/Colour\n3 - System Info\n4- Game-related\n5 - Exit')
+        choice = input()
+        if choice == '1':
+            choice = input('Please input your choice:\nblack\nred\ngreen\nyellow\nblue\npurple\ncyan\nwhite\nrandom\n')
+            try:
+                bext.fg(choice)
+                _fg = choice
+            except KeyError:
+                print('Invalid color/colour.')
+        elif choice == '2':
+            choice = input('Please input your choice:\nblack\nred\ngreen\nyellow\nblue\npurple\ncyan\nwhite\nrandom\n')
+            try:
+                bext.bg(choice)
+                _bg = choice
+            except KeyError:
+                print('Invalid color/colour.')
+        elif choice == '3':
+            print(f'System Info:\nVersion: {version}')
+            latest_version = requests.get('https://raw.githubusercontent.com/hellogoose/os/master/version.txt')
+            if latest_version > version:
+                print('A new update is available!')
+        elif choice == '4':  # todo
+            choice = input('Game Settings:\n1 - Change Invader Count\n2 - Exit')
+            if choice == '1':
+                invader_count = input(f'Current: {invader_count}\nNew: ')
+                print('Changed.')
+            elif choice == '2':
+                print('Thank you. Have a nice day!')
+        elif choice == '5':
+            print('Thank you. Have a nice day!')
+    elif command == 'shutdown':
+        if real_os == 'linux':
+            os.system('clear')
+        else:
+            os.system('cls')
+        bext.fg('reset')
+        bext.bg('reset')
+        bext.clear()
+        print('Thank you for using Very Good OS! Have a nice day!')
+        sys.exit()
+    elif command == 'rockpaperscissors':
+        # variables
+        ai_score = 0
+        player_score = 0
+        round = 0
+        # end variables
+        bext.bg('black')
+        bext.clear()
+        bext.fg('red')
+        print('Rock', end='')
+        bext.fg('yellow')
+        print('Paper', end='')
+        bext.fg('green')
+        print('Scissors')
+        bext.fg('white')
+        print('Type EXIT to exit.')
+        while True:
+            bext.bg('black')
+            bext.clear()
+            bext.fg('red')
+            print('Rock', end='')
+            bext.fg('yellow')
+            print('Paper', end='')
+            bext.fg('green')
+            print('Scissors')
+            bext.fg('white')
+            print(f'Round {round}\nYou: {player_score}\nAI: {ai_score}')
+            player_choice = input('Pick a move. (R/P/S)\n')
+            ai_choice = random.choice(['Rock', 'Paper', 'Scissors'])
+            print(f'AI picks {ai_choice}')
+            if player_choice == 'R':
+                if ai_choice == 'Paper':
+                    print('AI wins!')
+                    ai_score += 1
+                elif ai_choice == 'Scissors':
+                    print('You win!')
+                    player_score += 1
+                else:
+                    print('Tie.')
+            elif player_choice == 'P':
+                if ai_choice == 'Scissors':
+                    print('AI wins!')
+                    ai_score += 1
+                elif ai_choice == 'Rock':
+                    print('You win!')
+                    player_score += 1
+                else:
+                    print('Tie.')
+            elif player_choice == 'S':
+                if ai_choice == 'Paper':
+                    print('You win!')
+                    player_score += 1
+                elif ai_choice == 'Rock':
+                    print('AI wins!')
+                    ai_score += 1
+                else:
+                    print('Tie.')
+            elif player_choice == 'EXIT':
+                break
+            else:
+                print('Invalid choice.')
+            time.sleep(0.5)
+            if real_os == 'linux':
+                os.system('clear')
+            else:
+                os.system('cls')
+            round += 1
+        print('Thank you for playing. Have a nice day!')
+        time.sleep(0.5)
+        bext.bg(_bg)
+        bext.fg(_fg)
+        bext.clear()
+        if real_os == 'linux':
+            os.system('clear')
+        else:
+            os.system('cls')
     else:
         print('Invalid command.')
     main_menu()
