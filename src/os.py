@@ -109,6 +109,7 @@ def main_menu():
             try:
                 bext.fg(choice)
                 _fg = choice
+                bext.clear()
             except KeyError:
                 print('Invalid color/colour.')
         elif choice == '2':
@@ -116,6 +117,7 @@ def main_menu():
             try:
                 bext.bg(choice)
                 _bg = choice
+                bext.clear()
             except KeyError:
                 print('Invalid color/colour.')
         elif choice == '3':
