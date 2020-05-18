@@ -40,15 +40,15 @@ def main_menu():
         print(re.findall('echo (.*)', command)[0])
     elif command == 'duckduckgo':
         print(f'Welcome to', end='')
-        bext.fg('red')
-        print(f'{pyfiglet.figlet_format("DuckDuckGo")}')
+        bext.fg('green')
+        print(f'\n{pyfiglet.figlet_format("DuckDuckGo")}')
         bext.fg('white')
-        print('Powered by the DuckDuckGo API. (https://api.duckduckgo.com/api)\nPress CTRL to exit')
+        print('Powered by the DuckDuckGo API. (https://api.duckduckgo.com/api)\n')
         query = input('Please enter your search query.\n')
         with open('logs.txt', 'a') as history:
             history.write(f'{query}\n')
         results = requests.get(f'https://api.duckduckgo.com/?q={query}&format=json&pretty=1&t=verygoodos').json()
-        print(results)
+        print(results['AbstractText'])
     else:
         print('Invalid command.')
     main_menu()
