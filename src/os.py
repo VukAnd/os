@@ -102,7 +102,7 @@ def main_menu():
     elif re.compile('run (.*)').match(command):
         os.system(f'py {re.findall("run (.*)", command)[0]}')
     elif command == 'settings':
-        print('Welcome to the Settings. Input the corresponding number for what you want.\n1 - Text Color/Colour\n2 - Background Color/Colour\n3 - System Info\n4- Game-related\n5 - Exit')
+        print('Welcome to the Settings. Input the corresponding number for what you want.\n1 - Text Color/Colour\n2 - Background Color/Colour\n3 - System Info\n4 - Exit')
         choice = input()
         if choice == '1':
             choice = input('Please input your choice:\nblack\nred\ngreen\nyellow\nblue\npurple\ncyan\nwhite\nrandom\n')
@@ -123,14 +123,7 @@ def main_menu():
             latest_version = requests.get('https://raw.githubusercontent.com/hellogoose/os/master/version.txt')
             if latest_version > version:
                 print('A new update is available!')
-        elif choice == '4':  # todo
-            choice = input('Game Settings:\n1 - Change Invader Count\n2 - Exit')
-            if choice == '1':
-                invader_count = input(f'Current: {invader_count}\nNew: ')
-                print('Changed.')
-            elif choice == '2':
-                print('Thank you. Have a nice day!')
-        elif choice == '5':
+        elif choice == '4':
             print('Thank you. Have a nice day!')
     elif command == 'shutdown':
         if real_os == 'linux':
