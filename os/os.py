@@ -31,7 +31,7 @@ else:
 def main_menu():
     command = input('>')
     if command == 'help':
-        print('Very Good OS Help:\echo, showdir, duckduckgo, cat, delete [file], run [file]')
+        print('Very Good OS Help:\necho, showdir, duckduckgo, cat, delete [file], run [file]')
     elif command == 'showdir':
         for i in range(len(os.listdir(os.path.dirname(os.path.realpath(__file__))))):
             print(os.listdir(os.path.dirname(os.path.realpath(__file__)))[i])
