@@ -12,7 +12,7 @@ if proceed == 'Y' or proceed == 'y':
         os.system('pip install pyfiglet')
         os.system('pip install requests')
         print('Required modules installed. Installing OS...')
-        urllib.request.urlopen('https://github.com/hellogoose/os/releases/download/v1.1/os.zip')
+        urllib.request.urlopen('https://github.com/hellogoose/os/releases/download/v1.2/os.zip')
         print('Finished. Please unzip the file. Welcome to the new age of operating systems!')
         time.sleep(1)
     else:
