@@ -35,7 +35,7 @@ import random
 import datetime
 print('Booting up...')
 time.sleep(1)
-with open('logs.txt', 'r'):
+with open('logs.txt', 'w'):
     pass
 bext.bg('blue')
 bext.fg('white')
