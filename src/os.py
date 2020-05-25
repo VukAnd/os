@@ -63,7 +63,7 @@ def main_menu():
     global _fg, _bg, invader_count
     command = input('>')
     if command == 'help':
-        print('Very Good OS Help:\necho, showdir, duckduckgo, cat, delete [file], run [file], settings, rockpaperscissors, shutdown')
+        print('Very Good OS Help:\nhelp, echo, showdir, duckduckgo, cat, delete [file], run [file], settings, rockpaperscissors, screensaver, shutdown\nDo help [command] for more information on a command. ([ and ] not required.)')
     elif command == 'showdir':
         for i in range(len(os.listdir(os.path.dirname(os.path.realpath(__file__))))):
             print(os.listdir(os.path.dirname(os.path.realpath(__file__)))[i])
@@ -96,9 +96,15 @@ def main_menu():
                 file.write(contents)
         else:
             with open(data, 'r') as file:
-                print(file.read())
+                try:
+                    print(file.read())
+                except FileNotFoundError:
+                    print('File not found.')
     elif re.compile('delete (.*)').match(command):
-        os.remove(re.findall('delete (.*)', command)[0])
+        if re.findall('delete (.*)', command)[0] == 'logs.txt':
+            print('OS required file cannot be deleted.')
+        else:
+            os.remove(re.findall('delete (.*)', command)[0])
     elif re.compile('run (.*)').match(command):
         os.system(f'py {re.findall("run (.*)", command)[0]}')
     elif command == 'settings':
@@ -213,6 +219,45 @@ def main_menu():
             os.system('clear')
         else:
             os.system('cls')
+    elif command == 'screensaver':
+        print('Press CTRL to exit. (Warning: Very mild flashing lights.)')
+        time.sleep(1.5)
+        if real_os == 'linux':
+            os.system('clear')
+        else:
+            os.system('cls')
+        while not keyboard.is_pressed('ctrl'):
+            bext.bg('random')
+            bext.clear()
+            time.sleep(1)
+        bext.bg(_bg)
+        bext.clear()
+    elif re.compile('help (.*)').match(command):
+        data = re.findall('help (.*)', command)[0]
+        if data == 'echo':
+            print('Usage: echo [text]\nPrints text to the screen.')
+        elif data == 'help':
+            print('Usage: help [optional, command]\nGives information about a command if provided, or print a list of commands.')
+        elif data == 'showdir':
+            print('Shows files inside OS directory.')
+        elif data == 'duckduckgo':
+            print('Opens the DuckDuckGo search engine, powered by the DuckDuckGo API. (https://api.duckduckgo.com/api)')
+        elif data == 'cat':
+            print('Usage: cat [file] or cat >[filename]\nRead a file, or create/edit a file.')
+        elif data == 'run':
+            print('Usage: run [file.py]\nRuns a Python file.')
+        elif data == 'delete':
+            print('Usage: delete [file]\nDeletes a file.')
+        elif data == 'settings':
+            print('Open the Settings menu.')
+        elif data == 'rockpaperscissors':
+            print('Play Rock Paper Scissors.')
+        elif data == 'screensaver':
+            print('Screensaver. (Warning: Mild flashing lights)')
+        elif data == 'shutdown':
+            print('Shutdown Very Good OS.')
+        else:
+            print('Not a command.')
     else:
         print('Invalid command.')
     main_menu()
